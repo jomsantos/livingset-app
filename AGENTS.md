@@ -12,6 +12,7 @@
 - `npm run dev` starts the local development server.
 - `npm run build` runs TypeScript checks and creates the production build.
 - `npm test` runs the unit test suite once.
+- `npm run update-cards` refreshes the generated checklist data.
 
 ## Code Guidelines
 
@@ -20,6 +21,7 @@
 - Keep checklist persistence in `localStorage`; do not add a backend for this static app.
 - Keep the Vite base path relative so the app works under a GitHub Pages repository path.
 - Avoid committing `node_modules` or `dist`.
+- Treat `src/data/cards.ts` as generated output; update it through the importer.
 
 ## Testing Guidelines
 

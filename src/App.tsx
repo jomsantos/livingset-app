@@ -1,16 +1,5 @@
 import { useEffect, useState } from 'react'
-
-type Card = {
-  id: number
-  name: string
-  set: string
-}
-
-const cards: Card[] = [
-  { id: 1, name: 'Card 1', set: 'Living Set' },
-  { id: 2, name: 'Card 2', set: 'Living Set' },
-  { id: 3, name: 'Card 3', set: 'Living Set' },
-]
+import { cards } from './data/cards'
 
 const storageKey = 'living-set-checklist'
 
@@ -81,7 +70,7 @@ export default function App() {
                   <span className="checkbox" aria-hidden="true">{isCompleted ? '✓' : ''}</span>
                   <span className="card-copy">
                     <strong>{card.name}</strong>
-                    <small>{card.set} / No. {String(card.id).padStart(3, '0')}</small>
+                    <small>{card.team} / No. {String(card.id).padStart(3, '0')}</small>
                   </span>
                   <span className="status">{isCompleted ? 'Collected' : 'Add to collection'}</span>
                 </button>
