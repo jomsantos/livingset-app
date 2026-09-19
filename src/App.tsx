@@ -3,6 +3,7 @@ import { cards } from './data/cards'
 
 const storageKey = 'living-set-checklist'
 const cardsPerPage = 12
+const clubs = ['All Clubs', ...Array.from(new Set(cards.map((card) => card.team))).sort()]
 
 function readCompletedCards(): number[] {
   try {
@@ -17,10 +18,12 @@ function readCompletedCards(): number[] {
 export default function App() {
   const [completedCards, setCompletedCards] = useState<number[]>(readCompletedCards)
   const [currentPage, setCurrentPage] = useState(1)
+  const [selectedClub, setSelectedClub] = useState('All Clubs')
   const completedCount = cards.filter((card) => completedCards.includes(card.id)).length
   const progress = Math.round((completedCount / cards.length) * 100)
-  const totalPages = Math.ceil(cards.length / cardsPerPage)
-  const visibleCards = cards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage)
+  const filteredCards = selectedClub === 'All Clubs' ? cards : cards.filter((card) => card.team === selectedClub)
+  const totalPages = Math.max(1, Math.ceil(filteredCards.length / cardsPerPage))
+  const visibleCards = filteredCards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage)
 
   useEffect(() => {
     window.localStorage.setItem(storageKey, JSON.stringify(completedCards))
@@ -34,6 +37,11 @@ export default function App() {
 
   function resetChecklist() {
     setCompletedCards([])
+  }
+
+  function changeClub(club: string) {
+    setSelectedClub(club)
+    setCurrentPage(1)
   }
 
   return (
@@ -58,6 +66,13 @@ export default function App() {
         <div className="list-heading">
           <span>Your cards</span>
           <span>{completedCount} of {cards.length} collected</span>
+        </div>
+
+        <div className="filter-row">
+          <label htmlFor="club-filter">Filter by club</label>
+          <select id="club-filter" value={selectedClub} onChange={(event) => changeClub(event.target.value)}>
+            {clubs.map((club) => <option key={club}>{club}</option>)}
+          </select>
         </div>
 
         <ul className="checklist">

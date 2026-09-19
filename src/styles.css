@@ -40,6 +40,8 @@ h1 { max-width: 440px; margin: 0; color: #1e2926; font-size: clamp(2.4rem, 7vw, 
 .progress-track { height: 7px; margin: 46px 0 36px; overflow: hidden; background: #e2ded4; }
 .progress-track span { display: block; height: 100%; background: #bb6b3d; transition: width 240ms ease; }
 .list-heading { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; color: #8c918a; font-size: 0.7rem; text-transform: uppercase; }
+.filter-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; color: #8c918a; font-family: 'DM Mono', monospace; font-size: 0.68rem; text-transform: uppercase; }
+.filter-row select { min-width: 190px; padding: 9px 30px 9px 10px; color: #1e2926; font: inherit; font-size: 0.68rem; text-transform: none; background: #f1eee7; border: 1px solid #d5d1c7; }
 .checklist { padding: 0; margin: 0; list-style: none; }
 .checklist { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .card-row { min-width: 0; }
@@ -65,6 +67,8 @@ h1 { max-width: 440px; margin: 0; color: #1e2926; font-size: clamp(2.4rem, 7vw, 
 @media (max-width: 520px) {
   .app-shell { padding: 20px 12px; }
   .checklist-panel { padding: 28px 20px; }
+  .filter-row { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .filter-row select { width: 100%; }
   .checklist { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .card-toggle { min-height: 145px; padding: 14px; }
   .status { display: none; }

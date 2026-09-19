@@ -41,6 +41,16 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: 'Previous' })).not.toBeDisabled()
   })
 
+  it('filters cards by club and resets to the first page', () => {
+    render(<App />)
+
+    fireEvent.change(screen.getByLabelText('Filter by club'), { target: { value: cards[0].team } })
+
+    expect(screen.getByRole('button', { name: new RegExp(cards[0].name, 'i') })).toBeInTheDocument()
+    expect(screen.getByLabelText('Filter by club')).toHaveValue(cards[0].team)
+    expect(screen.queryByRole('button', { name: new RegExp(cards[1].name, 'i') })).not.toBeInTheDocument()
+  })
+
   it('restores saved progress and can reset it', () => {
     window.localStorage.setItem('living-set-checklist', JSON.stringify([cards[0].id]))
     render(<App />)
