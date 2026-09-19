@@ -1,7 +1,7 @@
 import { writeFile } from 'node:fs/promises'
 import * as cheerio from 'cheerio'
 
-const sourceUrl = 'https://herohabit.com/topps-baseball-living-set/'
+const sourceUrl = 'https://herohabit.com/topps-ucl-living-set/'
 const outputPath = new URL('../src/data/cards.ts', import.meta.url)
 
 const response = await fetch(sourceUrl, {
@@ -20,8 +20,9 @@ if (html.includes('Just a moment...') || html.length < 50_000) {
 const $ = cheerio.load(html)
 const cards = []
 
-$('table').each((_, table) => {
-  const team = $(table).prevAll('h2, h3').first().text().trim()
+$('figure.wp-block-table').each((_, figure) => {
+  const table = $(figure).find('table').first()
+  const team = $(figure).prevAll('p[id]').first().text().trim()
   $(table).find('tr').each((__, row) => {
     const values = $(row).find('td').map((___, cell) => $(cell).text().replace(/\s+/g, ' ').trim()).get()
     const id = Number(values[0])
@@ -41,7 +42,7 @@ $('table').each((_, table) => {
 
 const uniqueCards = [...new Map(cards.map((card) => [card.id, card])).values()].sort((a, b) => a.id - b.id)
 const maxId = uniqueCards.at(-1)?.id ?? 0
-if (uniqueCards.length < 700 || maxId < 700) {
+if (uniqueCards.length < 250 || maxId < 350) {
   throw new Error(`Checklist validation failed: found ${uniqueCards.length} cards, max ID ${maxId}`)
 }
 

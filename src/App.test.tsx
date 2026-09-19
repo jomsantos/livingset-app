@@ -11,7 +11,7 @@ describe('App', () => {
   it('renders the full checklist and initial progress', () => {
     render(<App />)
 
-    expect(screen.getByRole('heading', { name: 'Topps Living Set' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'UEFA Living Set' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: new RegExp(cards[0].name, 'i') })).toBeInTheDocument()
     expect(screen.getByText('00')).toBeInTheDocument()
     expect(screen.getByText(`0 of ${cards.length} collected`)).toBeInTheDocument()
@@ -26,7 +26,19 @@ describe('App', () => {
     expect(card).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByLabelText(`${Math.round((1 / cards.length) * 100)}% complete`)).toBeInTheDocument()
     expect(screen.getByText(`1 of ${cards.length} collected`)).toBeInTheDocument()
-    expect(window.localStorage.getItem('living-set-checklist')).toBe('[1]')
+    expect(window.localStorage.getItem('living-set-checklist')).toBe(JSON.stringify([cards[0].id]))
+  })
+
+  it('paginates the card grid', () => {
+    render(<App />)
+
+    expect(screen.getByRole('button', { name: new RegExp(cards[0].name, 'i') })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: new RegExp(cards[12].name, 'i') })).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Next' }))
+
+    expect(screen.getByRole('button', { name: new RegExp(cards[12].name, 'i') })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Previous' })).not.toBeDisabled()
   })
 
   it('restores saved progress and can reset it', () => {

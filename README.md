@@ -29,7 +29,7 @@ npm run update-cards # Refresh generated checklist data
 
 Checklist progress is saved in the browser's `localStorage` and stays on the same device and browser.
 
-Card data is generated from the [Hero Habit Topps Living Set checklist](https://herohabit.com/topps-baseball-living-set/) and stored in `src/data/cards.ts`. GitHub Actions checks for source changes weekly and commits a validated update automatically.
+Card data is generated from the [Hero Habit Topps UCL Living Set checklist](https://herohabit.com/topps-ucl-living-set/) and stored in `src/data/cards.ts`. GitHub Actions checks for source changes weekly and commits a validated update automatically.
 
 ## Deployment
 

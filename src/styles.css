@@ -41,16 +41,23 @@ h1 { max-width: 440px; margin: 0; color: #1e2926; font-size: clamp(2.4rem, 7vw, 
 .progress-track span { display: block; height: 100%; background: #bb6b3d; transition: width 240ms ease; }
 .list-heading { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; color: #8c918a; font-size: 0.7rem; text-transform: uppercase; }
 .checklist { padding: 0; margin: 0; list-style: none; }
-.card-row { border-top: 1px solid #dfddd5; }
-.card-toggle { display: flex; width: 100%; align-items: center; gap: 16px; padding: 19px 0; color: #1e2926; text-align: left; background: none; border: 0; cursor: pointer; }
+.checklist { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.card-row { min-width: 0; }
+.card-toggle { display: flex; min-height: 164px; width: 100%; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 14px; padding: 18px; color: #1e2926; text-align: left; background: #f1eee7; border: 1px solid #dfddd5; cursor: pointer; }
 .card-toggle:hover .card-copy strong { color: #bb6b3d; }
 .checkbox { display: grid; width: 24px; height: 24px; flex: 0 0 24px; place-items: center; color: #f8f6f0; font-size: 0.85rem; border: 1px solid #b9b8ae; border-radius: 50%; transition: background 180ms ease, border-color 180ms ease; }
-.card-copy { display: grid; gap: 5px; flex: 1; }
+.card-copy { display: grid; gap: 5px; }
 .card-copy strong { font-size: 1rem; transition: color 180ms ease; }
 .card-copy small { color: #969a92; font-size: 0.65rem; }
 .status { color: #969a92; font-size: 0.65rem; }
 .is-complete .checkbox { background: #bb6b3d; border-color: #bb6b3d; }
 .is-complete .card-copy strong { color: #969a92; text-decoration: line-through; }
+.pagination { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 28px; }
+.pagination button { min-height: 34px; padding: 0 10px; color: #bb6b3d; font-family: 'DM Mono', monospace; font-size: 0.65rem; border: 1px solid #d5d1c7; background: #f8f6f0; cursor: pointer; }
+.pagination button:disabled { color: #c4c5be; cursor: not-allowed; }
+.page-numbers { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+.page-numbers .page-number { width: 34px; padding: 0; }
+.page-numbers .page-number.is-current { color: #f8f6f0; background: #bb6b3d; border-color: #bb6b3d; }
 .panel-footer { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-top: 34px; color: #a1a39c; font-size: 0.62rem; }
 .reset-button { padding: 0; color: #bb6b3d; font: inherit; font-size: 0.62rem; border: 0; background: none; cursor: pointer; }
 .reset-button:disabled { color: #c4c5be; cursor: not-allowed; }
@@ -58,6 +65,8 @@ h1 { max-width: 440px; margin: 0; color: #1e2926; font-size: clamp(2.4rem, 7vw, 
 @media (max-width: 520px) {
   .app-shell { padding: 20px 12px; }
   .checklist-panel { padding: 28px 20px; }
+  .checklist { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .card-toggle { min-height: 145px; padding: 14px; }
   .status { display: none; }
   .panel-footer { align-items: flex-start; flex-direction: column; gap: 12px; }
 }
