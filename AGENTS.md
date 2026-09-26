@@ -19,6 +19,7 @@
 - Keep components and behavior in `src/`.
 - Prefer typed React state and accessible native controls.
 - Keep checklist persistence in `localStorage`; do not add a backend for this static app.
+- Supabase is an optional direct-from-browser sync target; use the public publishable key with row-level security and never bundle a service-role key.
 - Keep the Vite base path relative so the app works under a GitHub Pages repository path.
 - Avoid committing `node_modules` or `dist`.
 - Treat `src/data/cards.ts` as generated output; update it through the importer.

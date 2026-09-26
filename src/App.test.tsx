@@ -26,7 +26,7 @@ describe('App', () => {
     expect(card).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByLabelText(`${Math.round((1 / cards.length) * 100)}% complete`)).toBeInTheDocument()
     expect(screen.getByText(`1 of ${cards.length} collected`)).toBeInTheDocument()
-    expect(window.localStorage.getItem('living-set-checklist')).toBe(JSON.stringify([cards[0].id]))
+    expect(window.localStorage.getItem('living-set-checklist:uefa-club-competitions')).toBe(JSON.stringify([cards[0].id]))
   })
 
   it('paginates the card grid', () => {
@@ -52,7 +52,7 @@ describe('App', () => {
   })
 
   it('restores saved progress and can reset it', () => {
-    window.localStorage.setItem('living-set-checklist', JSON.stringify([cards[0].id]))
+    window.localStorage.setItem('living-set-checklist:uefa-club-competitions', JSON.stringify([cards[0].id]))
     render(<App />)
 
     expect(screen.getByRole('button', { name: new RegExp(cards[0].name, 'i') })).toHaveAttribute('aria-pressed', 'true')
@@ -61,6 +61,12 @@ describe('App', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Reset list' }))
 
     expect(screen.getByText(`0 of ${cards.length} collected`)).toBeInTheDocument()
-    expect(window.localStorage.getItem('living-set-checklist')).toBe('[]')
+    expect(window.localStorage.getItem('living-set-checklist:uefa-club-competitions')).toBe('[]')
+  })
+
+  it('explains that progress remains local when Supabase is not configured', () => {
+    render(<App />)
+
+    expect(screen.getByText('Cloud sync not configured; progress is saved on this device.')).toBeInTheDocument()
   })
 })
