@@ -226,6 +226,7 @@ export default function App() {
           <span style={{ width: `${progress}%` }} />
         </div>
 
+        <div className="content-area">
         <div className="list-heading">
           <span>Your cards</span>
           <span>{completedCount} of {cards.length} collected</span>
@@ -295,6 +296,7 @@ export default function App() {
             Next
           </button>
         </nav>
+        </div>
 
         <footer className="panel-footer">
           <span>{supabase && session ? 'Progress is synced to your account.' : 'Progress is saved on this device.'}</span>
