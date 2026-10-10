@@ -1,5 +1,7 @@
 # Topps Living Set Checklist
 
+[Open the live checklist](https://jomsantos.github.io/livingset-app/)
+
 A small React + TypeScript checklist for tracking cards in a Topps Living Set collection.
 
 ## Requirements
